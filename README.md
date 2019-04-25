@@ -6,6 +6,10 @@
 
 #### 客户端
 
+##### 手动运行
+直接运行AutoUpdate.exe即可
+
+##### 程序调用
 ```C#
 
     static class Program
@@ -20,7 +24,7 @@
             //程序默认为无参数启动
             if (args.Length == 0)
             {
-                //如果有自动更新程序，则进行自动更新
+                //目录中存在自动更新程序时才进行自动更新
                 if (File.Exists(updatePath))
                 {
                     //第二个参数是更新完要运行的程序名
