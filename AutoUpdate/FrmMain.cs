@@ -18,7 +18,7 @@ namespace AutoUpdate
         string webRootPath;
         JavaScriptSerializer convert = new JavaScriptSerializer();
         long currentIndex, currentCount;
-        string currentFileName;
+        string currentFileName = "UpdateConfig.dat";
         long totalIndex, totalCount;
         public DateTime dtLastUpdateTime;
 
@@ -32,17 +32,40 @@ namespace AutoUpdate
             this.ftpUserName = ConfigurationManager.AppSettings["UserName"];
             this.ftpPassword = ConfigurationManager.AppSettings["Password"];
             this.configPath = ConfigurationManager.AppSettings["ConfigPath"];
-            this.Download(this.configPath, configName, "", configName);
-            var updateInfo = this.GetUpdateInfo();
-            if (updateInfo == null)
+            Task.Factory.StartNew(() =>
             {
-                MessageBoxEx.Show("获取更新配置失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
-                return;
-            }
-            this.webRootPath = updateInfo.RootPath;
-            this.totalCount = updateInfo.FileList.Sum(s => s.Size);
-            this.UpdateFileList(updateInfo.FileList);
+                this.Download(this.configPath, configName, "", configName);
+                var updateInfo = this.GetUpdateInfo();
+                if (updateInfo == null)
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        MessageBoxEx.Show("获取更新配置失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        this.Close();
+                    }));
+                    return;
+                }
+                else
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        this.webBrowser.Url = new Uri(updateInfo.InfoPath);
+                    }));
+                }
+                this.webRootPath = updateInfo.RootPath;
+                this.totalIndex = 0;
+                this.totalCount = updateInfo.FileList.Sum(s => s.Size);
+                if (this.UpdateFileList(updateInfo.FileList))
+                {
+                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                    config.AppSettings.Settings["UpdateTime"].Value = this.dtLastUpdateTime.ToString("yyyy-MM-dd HH:mm:ss");
+                    config.Save(ConfigurationSaveMode.Modified);
+                }
+                this.Invoke(new Action(() =>
+                {
+                    this.Close();
+                }));
+            });
         }
 
         public bool Download(string remotePath, string remoteFileName, string localPath, string localFileName)
@@ -93,54 +116,42 @@ namespace AutoUpdate
             if (info == null)
                 return null;
             var localPath = Application.StartupPath;
-            var q = from file in Directory.GetFiles(localPath, "*.*", SearchOption.AllDirectories)
-                    join fileNew in info.FileList
+            var q = from fileRemote in info.FileList
+                    join f in Directory.GetFiles(localPath, "*.*", SearchOption.AllDirectories)
                     on new
                     {
-                        Directory = Path.GetDirectoryName(file).Replace(localPath, ""),
-                        Name = Path.GetFileName(file),
-                        MD5 = GetMD5HashFromFile(file)
-                    } equals new
-                    {
-                        fileNew.Directory,
-                        fileNew.Name,
-                        fileNew.MD5
+                        fileRemote.Directory,
+                        fileRemote.Name,
+                        fileRemote.MD5
                     }
-                    select fileNew;
-            info.FileList.RemoveAll(m => q.Contains(m));
+                    equals new
+                    {
+                        Directory = Path.GetDirectoryName(f).Replace(localPath, ""),
+                        Name = Path.GetFileName(f),
+                        MD5 = GetMD5HashFromFile(f)
+                    } into temp
+                    from fileLocal in temp.DefaultIfEmpty()
+                    where fileLocal == null
+                    select fileRemote;
+            info.FileList = q.ToList();
             return info;
         }
-        public void UpdateFileList(List<FileItem> fileItemList)
+        public bool UpdateFileList(List<FileItem> fileList)
         {
-            Task.Factory.StartNew(arg =>
+            var result = true;
+            foreach (var fileItem in fileList)
             {
-                var fileList = arg as List<FileItem>;
-                if (fileList == null)
-                    return;
-                var result = true;
-                foreach (var fileItem in fileList)
-                {
-                    currentIndex = 0;
-                    currentCount = fileItem.Size;
-                    currentFileName = fileItem.Name;
-                    var fileResult = false;
-                    if (fileItem.Name == "AutoUpdate.exe")
-                        fileResult = this.Download(webRootPath + fileItem.Directory, fileItem.Name, fileItem.Directory, "AutoUpdate.exe.tmp");
-                    else
-                        fileResult = this.Download(webRootPath + fileItem.Directory, fileItem.Name, fileItem.Directory, fileItem.Name);
-                    result = result && fileResult;
-                }
-                if (result)
-                {
-                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                    config.AppSettings.Settings["UpdateTime"].Value = this.dtLastUpdateTime.ToString("yyyy-MM-dd HH:mm:ss");
-                    config.Save(ConfigurationSaveMode.Modified);
-                }
-                this.Invoke(new Action(() =>
-                {
-                    this.Close();
-                }));
-            }, fileItemList);
+                currentIndex = 0;
+                currentCount = fileItem.Size;
+                currentFileName = fileItem.Name;
+                var fileResult = false;
+                if (fileItem.Name == "AutoUpdate.exe")
+                    fileResult = this.Download(webRootPath + fileItem.Directory, fileItem.Name, fileItem.Directory, "AutoUpdate.exe.tmp");
+                else
+                    fileResult = this.Download(webRootPath + fileItem.Directory, fileItem.Name, fileItem.Directory, fileItem.Name);
+                result = result && fileResult;
+            }
+            return result;
         }
 
         private void timerUpdate_Tick(object sender, EventArgs e)

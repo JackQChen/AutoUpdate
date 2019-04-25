@@ -10,6 +10,7 @@ namespace AutoUpdateConfig
         }
 
         public string RootPath { get; set; }
+        public string InfoPath { get; set; }
 
         public List<FileItem> FileList { get; set; }
     }

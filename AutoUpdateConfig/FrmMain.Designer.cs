@@ -36,11 +36,13 @@
             this.txtWebPath = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.txtInfoPath = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(145, 99);
+            this.btnGenerate.Location = new System.Drawing.Point(145, 121);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(94, 28);
             this.btnGenerate.TabIndex = 0;
@@ -69,7 +71,7 @@
             // 
             // btnPath
             // 
-            this.btnPath.Location = new System.Drawing.Point(45, 99);
+            this.btnPath.Location = new System.Drawing.Point(45, 121);
             this.btnPath.Name = "btnPath";
             this.btnPath.Size = new System.Drawing.Size(94, 28);
             this.btnPath.TabIndex = 3;
@@ -96,11 +98,32 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "网络路径";
             // 
+            // txtInfoPath
+            // 
+            this.txtInfoPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtInfoPath.Location = new System.Drawing.Point(71, 79);
+            this.txtInfoPath.Name = "txtInfoPath";
+            this.txtInfoPath.Size = new System.Drawing.Size(201, 21);
+            this.txtInfoPath.TabIndex = 7;
+            this.txtInfoPath.Text = "http://";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 82);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "信息地址";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 160);
+            this.ClientSize = new System.Drawing.Size(284, 179);
+            this.Controls.Add(this.txtInfoPath);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.txtWebPath);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnPath);
@@ -126,6 +149,8 @@
         private System.Windows.Forms.TextBox txtWebPath;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.TextBox txtInfoPath;
+        private System.Windows.Forms.Label label3;
     }
 }
 

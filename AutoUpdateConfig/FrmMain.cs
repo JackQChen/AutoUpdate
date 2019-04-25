@@ -22,6 +22,7 @@ namespace AutoUpdateConfig
             this.txtLocalPath.Text = ConfigurationManager.AppSettings["LocalPath"];
             this.folderBrowserDialog1.SelectedPath = this.txtLocalPath.Text;
             this.txtWebPath.Text = ConfigurationManager.AppSettings["WebPath"];
+            this.txtInfoPath.Text = ConfigurationManager.AppSettings["InfoPath"];
         }
 
         private void btnPath_Click(object sender, EventArgs e)
@@ -42,6 +43,7 @@ namespace AutoUpdateConfig
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings["LocalPath"].Value = this.txtLocalPath.Text;
             config.AppSettings.Settings["WebPath"].Value = this.txtWebPath.Text;
+            config.AppSettings.Settings["InfoPath"].Value = this.txtInfoPath.Text;
             config.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection("appSettings");
 
@@ -55,6 +57,7 @@ namespace AutoUpdateConfig
                     MD5 = GetMD5HashFromFile(fullPath),
                     Size = new FileInfo(fullPath).Length
                 }).ToList();
+            info.InfoPath = this.txtInfoPath.Text;
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "UpdateConfig.dat", convert.Serialize(info));
             File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "UpdateTime.dat", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             MessageBox.Show("生成成功!", "提示");

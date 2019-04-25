@@ -34,7 +34,7 @@
             this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             this.labFileName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.pbTotal = new AutoUpdate.ProgressBar();
@@ -74,16 +74,17 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "当前进度";
             // 
-            // webBrowser1
+            // webBrowser
             // 
-            this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.webBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser1.Location = new System.Drawing.Point(14, 12);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(507, 246);
-            this.webBrowser1.TabIndex = 5;
+            this.webBrowser.Location = new System.Drawing.Point(14, 12);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.ScriptErrorsSuppressed = true;
+            this.webBrowser.Size = new System.Drawing.Size(507, 246);
+            this.webBrowser.TabIndex = 5;
             // 
             // label1
             // 
@@ -150,7 +151,7 @@
             this.Controls.Add(this.labFileSize);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.webBrowser);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pbTotal);
             this.Controls.Add(this.labFileName);
@@ -173,7 +174,7 @@
         private System.Windows.Forms.Label labFileName;
         private ProgressBar pbTotal;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.WebBrowser webBrowser;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labFileSize;
