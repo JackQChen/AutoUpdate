@@ -49,7 +49,14 @@ namespace AutoUpdate
                 {
                     this.Invoke(new Action(() =>
                     {
-                        this.webBrowser.Url = new Uri(updateInfo.InfoPath);
+                        try
+                        {
+                            if (!string.IsNullOrEmpty(updateInfo.InfoPath))
+                                this.webBrowser.Url = new Uri(updateInfo.InfoPath);
+                        }
+                        catch
+                        {
+                        }
                     }));
                 }
                 this.webRootPath = updateInfo.RootPath;
