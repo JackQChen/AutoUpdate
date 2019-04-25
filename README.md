@@ -1,4 +1,7 @@
-### 调用示例
+
+![](https://github.com/chen365409389/AutoUpdate/blob/master/Img/Main.png)<br><br>
+
+### 使用方式
 
 #### 服务端
 
