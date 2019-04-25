@@ -1,5 +1,5 @@
 ### 主界面
-![](https://github.com/chen365409389/AutoUpdate/blob/master/Img/Main.png)<br><br>
+![](https://github.com/chen365409389/AutoUpdate/blob/master/Img/Main.png)<br>
 
 ### 使用方式
 
