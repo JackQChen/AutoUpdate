@@ -39,13 +39,6 @@
             //自动更新启动程序时第一个参数为AutoUpdate
             else if (args[0] == "AutoUpdate")
             {
-                var newUpdatePath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdate.exe.tmp";
-                //判断自动更新程序自身是否需要更新
-                if (File.Exists(newUpdatePath))
-                {
-                    File.Delete(updatePath);
-                    File.Move(newUpdatePath, updatePath);
-                }
                 //var remotingConfigPath = AppDomain.CurrentDomain.BaseDirectory + "RemotingConfig.xml";
                 //第二个参数是本次是否发生过更新
                 //有新的更新内容
