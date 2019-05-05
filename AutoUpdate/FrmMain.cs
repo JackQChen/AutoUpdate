@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
@@ -20,7 +20,7 @@ namespace AutoUpdate
         long currentIndex, currentCount;
         string currentFileName = "UpdateConfig.dat";
         long totalIndex, totalCount;
-        public DateTime dtLastUpdateTime;
+        public DateTime remoteTime;
 
         public FrmMain()
         {
@@ -32,7 +32,7 @@ namespace AutoUpdate
             this.ftpUserName = ConfigurationManager.AppSettings["UserName"];
             this.ftpPassword = ConfigurationManager.AppSettings["Password"];
             this.configPath = ConfigurationManager.AppSettings["ConfigPath"];
-            Task.Factory.StartNew(() =>
+            new Thread(() =>
             {
                 this.Download(this.configPath, configName, "", configName);
                 var updateInfo = this.GetUpdateInfo();
@@ -65,14 +65,15 @@ namespace AutoUpdate
                 if (this.UpdateFileList(updateInfo.FileList))
                 {
                     Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                    config.AppSettings.Settings["UpdateTime"].Value = this.dtLastUpdateTime.ToString("yyyy-MM-dd HH:mm:ss");
+                    config.AppSettings.Settings["UpdateTime"].Value = this.remoteTime.ToString("yyyy-MM-dd HH:mm:ss");
                     config.Save(ConfigurationSaveMode.Modified);
                 }
                 this.Invoke(new Action(() =>
                 {
                     this.Close();
                 }));
-            });
+            })
+            { IsBackground = true }.Start();
         }
 
         public bool Download(string remotePath, string remoteFileName, string localPath, string localFileName)

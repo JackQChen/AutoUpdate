@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -22,25 +23,51 @@ namespace AutoUpdate
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 UpdateCheck check = new UpdateCheck();
-                var currentTime = Convert.ToDateTime(ConfigurationManager.AppSettings["UpdateTime"]);
-                var lastTime = check.GetUpdateTime();
-                var needUpdate = currentTime < lastTime;
+                var localTime = Convert.ToDateTime(ConfigurationManager.AppSettings["UpdateTime"]);
+                var remoteTime = check.GetUpdateTime();
+                var needUpdate = args.Length == 0 ? true : localTime < remoteTime;
                 if (needUpdate)
                 {
                     var frm = new FrmMain();
                     //无参启动不更新时间
-                    frm.dtLastUpdateTime = args.Length == 0 ? currentTime : lastTime;
+                    frm.remoteTime = args.Length == 0 ? localTime : remoteTime;
                     Application.Run(frm);
                 }
                 if (args.Length == 0)
                     MessageBoxEx.Show("自动更新完成!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 else
                     Process.Start(AppDomain.CurrentDomain.BaseDirectory + args[0], "AutoUpdate " + needUpdate.ToString());
+                //检查更新自身
+                UpdateSelf();
             }
             else
             {
                 MessageBoxEx.Show("自动更新正在运行中!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        static void UpdateSelf()
+        {
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpate.exe",
+                fileTempPath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpate.exe.tmp",
+                batPath = AppDomain.CurrentDomain.BaseDirectory + "Update.bat";
+            if (!File.Exists(fileTempPath))
+                return;
+            File.WriteAllText(batPath, string.Format(@"{0}
+{1}
+{2}",
+"del " + filePath,
+"rename " + fileTempPath + " " + filePath,
+"del " + batPath));
+            new Process()
+            {
+                StartInfo = new ProcessStartInfo()
+                {
+                    FileName = batPath,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                }
+            }.Start();
         }
     }
 }
