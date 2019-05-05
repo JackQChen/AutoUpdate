@@ -88,6 +88,7 @@ namespace AutoUpdate
                 FtpWebRequest reqFTP = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("{0}//{1}", remotePath, remoteFileName)));
                 reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
                 reqFTP.UseBinary = true;
+                reqFTP.KeepAlive = false;
                 reqFTP.Credentials = new NetworkCredential(ftpUserName, ftpPassword);
                 FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
                 Stream ftpStream = response.GetResponseStream();

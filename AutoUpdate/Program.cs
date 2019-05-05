@@ -48,8 +48,8 @@ namespace AutoUpdate
 
         static void UpdateSelf()
         {
-            string filePath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpate.exe",
-                fileTempPath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpate.exe.tmp",
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdate.exe",
+                fileTempPath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdate.exe.tmp",
                 batPath = AppDomain.CurrentDomain.BaseDirectory + "Update.bat";
             if (!File.Exists(fileTempPath))
                 return;
@@ -57,7 +57,7 @@ namespace AutoUpdate
 {1}
 {2}",
 "del " + filePath,
-"rename " + fileTempPath + " " + filePath,
+"ren " + fileTempPath + " AutoUpdate.exe",
 "del " + batPath));
             new Process()
             {
