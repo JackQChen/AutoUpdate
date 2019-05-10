@@ -42,7 +42,7 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(145, 121);
+            this.btnGenerate.Location = new System.Drawing.Point(195, 146);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(94, 28);
             this.btnGenerate.TabIndex = 0;
@@ -53,7 +53,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 29);
+            this.label1.Location = new System.Drawing.Point(26, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 1;
@@ -63,14 +63,14 @@
             // 
             this.txtLocalPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLocalPath.Location = new System.Drawing.Point(71, 26);
+            this.txtLocalPath.Location = new System.Drawing.Point(85, 39);
             this.txtLocalPath.Name = "txtLocalPath";
-            this.txtLocalPath.Size = new System.Drawing.Size(201, 21);
+            this.txtLocalPath.Size = new System.Drawing.Size(274, 21);
             this.txtLocalPath.TabIndex = 2;
             // 
             // btnPath
             // 
-            this.btnPath.Location = new System.Drawing.Point(45, 121);
+            this.btnPath.Location = new System.Drawing.Point(95, 146);
             this.btnPath.Name = "btnPath";
             this.btnPath.Size = new System.Drawing.Size(94, 28);
             this.btnPath.TabIndex = 3;
@@ -82,16 +82,16 @@
             // 
             this.txtWebPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtWebPath.Location = new System.Drawing.Point(71, 53);
+            this.txtWebPath.Location = new System.Drawing.Point(85, 69);
             this.txtWebPath.Name = "txtWebPath";
-            this.txtWebPath.Size = new System.Drawing.Size(201, 21);
+            this.txtWebPath.Size = new System.Drawing.Size(274, 21);
             this.txtWebPath.TabIndex = 5;
             this.txtWebPath.Text = "ftp://";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 56);
+            this.label2.Location = new System.Drawing.Point(26, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 4;
@@ -101,16 +101,16 @@
             // 
             this.txtInfoPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtInfoPath.Location = new System.Drawing.Point(71, 79);
+            this.txtInfoPath.Location = new System.Drawing.Point(85, 97);
             this.txtInfoPath.Name = "txtInfoPath";
-            this.txtInfoPath.Size = new System.Drawing.Size(201, 21);
+            this.txtInfoPath.Size = new System.Drawing.Size(274, 21);
             this.txtInfoPath.TabIndex = 7;
             this.txtInfoPath.Text = "http://";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 82);
+            this.label3.Location = new System.Drawing.Point(26, 100);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 6;
@@ -120,7 +120,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 179);
+            this.ClientSize = new System.Drawing.Size(384, 211);
             this.Controls.Add(this.txtInfoPath);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtWebPath);

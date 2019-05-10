@@ -50,7 +50,7 @@ namespace AutoUpdate
         {
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdate.exe",
                 fileTempPath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdate.exe.tmp",
-                batPath = AppDomain.CurrentDomain.BaseDirectory + Guid.NewGuid().ToString() + ".bat";
+                batPath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdate.bat";
             if (!File.Exists(fileTempPath))
                 return;
             File.WriteAllText(batPath, string.Format(@"{0}
