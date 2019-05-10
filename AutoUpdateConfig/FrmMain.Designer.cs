@@ -65,7 +65,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLocalPath.Location = new System.Drawing.Point(71, 26);
             this.txtLocalPath.Name = "txtLocalPath";
-            this.txtLocalPath.ReadOnly = true;
             this.txtLocalPath.Size = new System.Drawing.Size(201, 21);
             this.txtLocalPath.TabIndex = 2;
             // 
