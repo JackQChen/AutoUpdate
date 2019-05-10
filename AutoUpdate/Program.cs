@@ -50,7 +50,7 @@ namespace AutoUpdate
         {
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdate.exe",
                 fileTempPath = AppDomain.CurrentDomain.BaseDirectory + "AutoUpdate.exe.tmp",
-                batPath = AppDomain.CurrentDomain.BaseDirectory + "Update.bat";
+                batPath = AppDomain.CurrentDomain.BaseDirectory + Guid.NewGuid().ToString() + ".bat";
             if (!File.Exists(fileTempPath))
                 return;
             File.WriteAllText(batPath, string.Format(@"{0}
@@ -59,15 +59,7 @@ namespace AutoUpdate
 "del " + filePath,
 "ren " + fileTempPath + " AutoUpdate.exe",
 "del " + batPath));
-            new Process()
-            {
-                StartInfo = new ProcessStartInfo()
-                {
-                    FileName = batPath,
-                    UseShellExecute = false,
-                    CreateNoWindow = true
-                }
-            }.Start();
+            Process.Start(batPath);
         }
     }
 }
