@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace AutoUpdate
 {
-    public partial class FrmMain : Form
+    public partial class MainForm : Form
     {
         string configPath, configName = "UpdateConfig.dat";
         string ftpUserName, ftpPassword;
@@ -22,7 +22,7 @@ namespace AutoUpdate
         long totalIndex, totalCount;
         public DateTime remoteTime;
 
-        public FrmMain()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -35,6 +35,7 @@ namespace AutoUpdate
             new Thread(() =>
             {
                 this.Download(this.configPath, configName, "", configName);
+                this.currentFileName = "文件校验中...";
                 var updateInfo = this.GetUpdateInfo();
                 if (updateInfo == null)
                 {

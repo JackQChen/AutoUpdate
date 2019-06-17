@@ -28,7 +28,7 @@ namespace AutoUpdate
                 var needUpdate = args.Length == 0 ? true : localTime < remoteTime;
                 if (needUpdate)
                 {
-                    var frm = new FrmMain();
+                    var frm = new MainForm();
                     //无参启动不更新时间
                     frm.remoteTime = args.Length == 0 ? localTime : remoteTime;
                     Application.Run(frm);

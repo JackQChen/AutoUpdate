@@ -1,6 +1,6 @@
 ﻿namespace AutoUpdateConfig
 {
-    partial class FrmMain
+    partial class MainForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnGenerate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtLocalPath = new System.Windows.Forms.TextBox();

@@ -1,6 +1,6 @@
 ﻿namespace AutoUpdate
 {
-    partial class FrmMain
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             this.labFileName = new System.Windows.Forms.Label();
