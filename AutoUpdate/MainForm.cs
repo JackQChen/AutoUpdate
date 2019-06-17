@@ -36,7 +36,9 @@ namespace AutoUpdate
             {
                 this.Download(this.configPath, configName, "", configName);
                 this.currentFileName = "文件校验中...";
-                var updateInfo = this.GetUpdateInfo();
+                var configPath = AppDomain.CurrentDomain.BaseDirectory + configName;
+                var updateInfo = convert.Deserialize<UpdateInfo>(File.ReadAllText(configPath));
+                File.Delete(configPath);
                 if (updateInfo == null)
                 {
                     this.Invoke(new Action(() =>
@@ -60,10 +62,11 @@ namespace AutoUpdate
                         }
                     }));
                 }
+                this.UpdateFileList(updateInfo);
                 this.webRootPath = updateInfo.RootPath;
                 this.totalIndex = 0;
                 this.totalCount = updateInfo.FileList.Sum(s => s.Size);
-                if (this.UpdateFileList(updateInfo.FileList))
+                if (this.DownloadFileList(updateInfo.FileList))
                 {
                     Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                     config.AppSettings.Settings["UpdateTime"].Value = this.remoteTime.ToString("yyyy-MM-dd HH:mm:ss");
@@ -118,13 +121,8 @@ namespace AutoUpdate
             }
         }
 
-        public UpdateInfo GetUpdateInfo()
+        public UpdateInfo UpdateFileList(UpdateInfo info)
         {
-            var configPath = AppDomain.CurrentDomain.BaseDirectory + configName;
-            var info = convert.Deserialize<UpdateInfo>(File.ReadAllText(configPath));
-            File.Delete(configPath);
-            if (info == null)
-                return null;
             var localPath = Application.StartupPath;
             var q = from fileRemote in info.FileList
                     join f in Directory.GetFiles(localPath, "*.*", SearchOption.AllDirectories)
@@ -146,7 +144,8 @@ namespace AutoUpdate
             info.FileList = q.ToList();
             return info;
         }
-        public bool UpdateFileList(List<FileItem> fileList)
+
+        public bool DownloadFileList(List<FileItem> fileList)
         {
             var result = true;
             foreach (var fileItem in fileList)
