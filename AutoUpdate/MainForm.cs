@@ -62,7 +62,10 @@ namespace AutoUpdate
                         }
                     }));
                 }
-                this.UpdateFileList(updateInfo);
+                updateInfo.FileList.RemoveAll(file =>
+                {
+                    return file.MD5 == GetMD5HashFromFile(Application.StartupPath + file.Directory + "\\" + file.Name);
+                });
                 this.webRootPath = updateInfo.RootPath;
                 this.totalIndex = 0;
                 this.totalCount = updateInfo.FileList.Sum(s => s.Size);
@@ -119,30 +122,6 @@ namespace AutoUpdate
             {
                 outputStream.Close();
             }
-        }
-
-        public UpdateInfo UpdateFileList(UpdateInfo info)
-        {
-            var localPath = Application.StartupPath;
-            var q = from fileRemote in info.FileList
-                    join f in Directory.GetFiles(localPath, "*.*", SearchOption.AllDirectories)
-                    on new
-                    {
-                        fileRemote.Directory,
-                        fileRemote.Name,
-                        fileRemote.MD5
-                    }
-                    equals new
-                    {
-                        Directory = Path.GetDirectoryName(f).Replace(localPath, ""),
-                        Name = Path.GetFileName(f),
-                        MD5 = GetMD5HashFromFile(f)
-                    } into temp
-                    from fileLocal in temp.DefaultIfEmpty()
-                    where fileLocal == null
-                    select fileRemote;
-            info.FileList = q.ToList();
-            return info;
         }
 
         public bool DownloadFileList(List<FileItem> fileList)
