@@ -35,7 +35,6 @@ namespace AutoUpdate
             new Thread(() =>
             {
                 this.Download(this.configPath, configName, "", configName);
-                this.currentFileName = "文件校验中...";
                 var configPath = AppDomain.CurrentDomain.BaseDirectory + configName;
                 var updateInfo = convert.Deserialize<UpdateInfo>(File.ReadAllText(configPath));
                 File.Delete(configPath);
@@ -62,6 +61,7 @@ namespace AutoUpdate
                         }
                     }));
                 }
+                this.currentFileName = "文件校验中...";
                 updateInfo.FileList.RemoveAll(file =>
                 {
                     return file.MD5 == GetMD5HashFromFile(Application.StartupPath + file.Directory + "\\" + file.Name);
