@@ -70,6 +70,7 @@
             // 
             // btnPath
             // 
+            this.btnPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPath.Image = global::AutoUpdateConfig.Properties.Resources.open;
             this.btnPath.Location = new System.Drawing.Point(324, 38);
             this.btnPath.Name = "btnPath";
