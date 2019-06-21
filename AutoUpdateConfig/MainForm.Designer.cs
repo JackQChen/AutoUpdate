@@ -42,9 +42,9 @@
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(195, 146);
+            this.btnGenerate.Location = new System.Drawing.Point(145, 148);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(94, 28);
+            this.btnGenerate.Size = new System.Drawing.Size(94, 30);
             this.btnGenerate.TabIndex = 0;
             this.btnGenerate.Text = "生成配置文件";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -65,16 +65,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLocalPath.Location = new System.Drawing.Point(85, 39);
             this.txtLocalPath.Name = "txtLocalPath";
-            this.txtLocalPath.Size = new System.Drawing.Size(274, 21);
+            this.txtLocalPath.Size = new System.Drawing.Size(233, 21);
             this.txtLocalPath.TabIndex = 2;
             // 
             // btnPath
             // 
-            this.btnPath.Location = new System.Drawing.Point(95, 146);
+            this.btnPath.Image = global::AutoUpdateConfig.Properties.Resources.open;
+            this.btnPath.Location = new System.Drawing.Point(324, 38);
             this.btnPath.Name = "btnPath";
-            this.btnPath.Size = new System.Drawing.Size(94, 28);
+            this.btnPath.Size = new System.Drawing.Size(35, 23);
             this.btnPath.TabIndex = 3;
-            this.btnPath.Text = "选择路径";
             this.btnPath.UseVisualStyleBackColor = true;
             this.btnPath.Click += new System.EventHandler(this.btnPath_Click);
             // 
@@ -82,7 +82,7 @@
             // 
             this.txtWebPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtWebPath.Location = new System.Drawing.Point(85, 69);
+            this.txtWebPath.Location = new System.Drawing.Point(85, 70);
             this.txtWebPath.Name = "txtWebPath";
             this.txtWebPath.Size = new System.Drawing.Size(274, 21);
             this.txtWebPath.TabIndex = 5;
@@ -91,7 +91,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 72);
+            this.label2.Location = new System.Drawing.Point(26, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 4;
@@ -101,7 +101,7 @@
             // 
             this.txtInfoPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtInfoPath.Location = new System.Drawing.Point(85, 97);
+            this.txtInfoPath.Location = new System.Drawing.Point(85, 101);
             this.txtInfoPath.Name = "txtInfoPath";
             this.txtInfoPath.Size = new System.Drawing.Size(274, 21);
             this.txtInfoPath.TabIndex = 7;
@@ -110,13 +110,13 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(26, 100);
+            this.label3.Location = new System.Drawing.Point(26, 104);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 6;
             this.label3.Text = "信息地址";
             // 
-            // FrmMain
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -130,7 +130,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnGenerate);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmMain";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "配置生成器";
             this.Load += new System.EventHandler(this.FrmMain_Load);
