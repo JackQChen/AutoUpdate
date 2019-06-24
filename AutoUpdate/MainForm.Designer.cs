@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             this.labFileName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
@@ -40,18 +38,8 @@
             this.pbTotal = new AutoUpdate.ProgressBar();
             this.pbCurrent = new AutoUpdate.ProgressBar();
             this.labFileSize = new System.Windows.Forms.Label();
+            this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(24, 24);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // timerUpdate
-            // 
-            this.timerUpdate.Enabled = true;
-            this.timerUpdate.Tick += new System.EventHandler(this.timerUpdate_Tick);
             // 
             // labFileName
             // 
@@ -142,7 +130,12 @@
             this.labFileSize.Size = new System.Drawing.Size(0, 12);
             this.labFileSize.TabIndex = 8;
             // 
-            // FrmMain
+            // timerUpdate
+            // 
+            this.timerUpdate.Enabled = true;
+            this.timerUpdate.Tick += new System.EventHandler(this.timerUpdate_Tick);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -158,7 +151,7 @@
             this.Controls.Add(this.pbCurrent);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmMain";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "自动更新";
             this.Shown += new System.EventHandler(this.FrmMain_Shown);
@@ -168,8 +161,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.Timer timerUpdate;
         private ProgressBar pbCurrent;
         private System.Windows.Forms.Label labFileName;
         private ProgressBar pbTotal;
@@ -178,5 +169,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labFileSize;
+        private System.Windows.Forms.Timer timerUpdate;
     }
 }
