@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace AutoUpdate
 {
-    public partial class MainForm : Form
+    public partial class FrmMain : Form
     {
         string configPath, configName = "UpdateConfig.dat";
         string ftpUserName, ftpPassword;
@@ -22,7 +22,7 @@ namespace AutoUpdate
         long totalIndex, totalCount;
         public DateTime remoteTime;
 
-        public MainForm()
+        public FrmMain()
         {
             InitializeComponent();
         }

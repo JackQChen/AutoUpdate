@@ -1,6 +1,6 @@
 ﻿namespace AutoUpdate
 {
-    partial class MainForm
+    partial class FrmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.labFileName = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
@@ -135,7 +135,7 @@
             this.timerUpdate.Enabled = true;
             this.timerUpdate.Tick += new System.EventHandler(this.timerUpdate_Tick);
             // 
-            // MainForm
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -151,7 +151,7 @@
             this.Controls.Add(this.pbCurrent);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MainForm";
+            this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "自动更新";
             this.Shown += new System.EventHandler(this.FrmMain_Shown);

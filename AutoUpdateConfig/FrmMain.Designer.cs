@@ -1,6 +1,6 @@
 ﻿namespace AutoUpdateConfig
 {
-    partial class MainForm
+    partial class FrmMain
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.btnGenerate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtLocalPath = new System.Windows.Forms.TextBox();
@@ -117,7 +117,7 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "信息地址";
             // 
-            // MainForm
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -131,7 +131,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnGenerate);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "MainForm";
+            this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "配置生成器";
             this.Load += new System.EventHandler(this.FrmMain_Load);

@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace AutoUpdateConfig
 {
-    public partial class MainForm : Form
+    public partial class FrmMain : Form
     {
         JavaScriptSerializer convert = new JavaScriptSerializer();
 
-        public MainForm()
+        public FrmMain()
         {
             InitializeComponent();
         }
