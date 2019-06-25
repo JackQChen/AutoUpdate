@@ -17,7 +17,7 @@ namespace AutoUpdate
         {
             MessageBoxEx.time = args.Length == 0 ? 0 : 5000;
             bool createdNew = false;
-            Mutex instance = new Mutex(true, Process.GetCurrentProcess().MainModule.FileName.Replace("\\", "/"), out createdNew);
+            Mutex instance = new Mutex(true, Application.ExecutablePath.Replace("\\", "/"), out createdNew);
             if (createdNew)
             {
                 Application.EnableVisualStyles();
