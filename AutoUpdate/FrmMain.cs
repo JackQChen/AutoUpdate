@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
@@ -165,10 +166,13 @@ namespace AutoUpdate
                 file = File.OpenRead(fileName);
             else
                 return null;
-            var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
             byte[] retVal = md5.ComputeHash(file);
             file.Close();
-            return BitConverter.ToString(retVal).Replace("-", "");
+            StringBuilder str = new StringBuilder();
+            for (int i = 0; i < retVal.Length; i++)
+                str.Append(retVal[i].ToString("X2"));
+            return str.ToString();
         }
 
         internal static string FormatFileSize(long fileSize)
@@ -176,11 +180,11 @@ namespace AutoUpdate
             if (fileSize < 0)
                 return "ErrorSize";
             else if (fileSize >= 1024 * 1024 * 1024)
-                return string.Format("{0:########0.00} GB", ((Double)fileSize) / (1024 * 1024 * 1024));
+                return string.Format("{0:########0.00} GB", ((double)fileSize) / (1024 * 1024 * 1024));
             else if (fileSize >= 1024 * 1024)
-                return string.Format("{0:####0.00} MB", ((Double)fileSize) / (1024 * 1024));
+                return string.Format("{0:####0.00} MB", ((double)fileSize) / (1024 * 1024));
             else if (fileSize >= 1024)
-                return string.Format("{0:####0.00} KB", ((Double)fileSize) / 1024);
+                return string.Format("{0:####0.00} KB", ((double)fileSize) / 1024);
             else
                 return string.Format("{0} Bytes", fileSize);
         }
