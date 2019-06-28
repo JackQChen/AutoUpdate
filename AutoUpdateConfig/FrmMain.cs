@@ -2,7 +2,6 @@
 using System.Configuration;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
@@ -70,15 +69,10 @@ namespace AutoUpdateConfig
                 file = File.OpenRead(fileName);
             else
                 return null;
-            System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
             byte[] retVal = md5.ComputeHash(file);
             file.Close();
-            StringBuilder str = new StringBuilder();
-            for (int i = 0; i < retVal.Length; i++)
-            {
-                str.Append(retVal[i].ToString("x2"));
-            }
-            return str.ToString().Trim().ToUpper();
+            return BitConverter.ToString(retVal).Replace("-", "");
         }
     }
 }
