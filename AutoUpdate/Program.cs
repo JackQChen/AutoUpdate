@@ -15,13 +15,13 @@ namespace AutoUpdate
         [STAThread]
         static void Main(string[] args)
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
             MessageBoxEx.time = args.Length == 0 ? 0 : 5000;
             bool createdNew = false;
             Mutex instance = new Mutex(true, Application.ExecutablePath.Replace("\\", "/"), out createdNew);
             if (createdNew)
             {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
                 UpdateCheck check = new UpdateCheck();
                 var localTime = Convert.ToDateTime(ConfigurationManager.AppSettings["UpdateTime"]);
                 var remoteTime = check.GetUpdateTime();
