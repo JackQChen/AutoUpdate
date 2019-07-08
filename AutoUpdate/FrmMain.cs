@@ -85,13 +85,12 @@ namespace AutoUpdate
 
         public bool Download(string remotePath, string remoteFileName, string localPath, string localFileName)
         {
-            FileStream outputStream = null;
             try
             {
                 var localDir = AppDomain.CurrentDomain.BaseDirectory + localPath;
                 if (!Directory.Exists(localDir))
                     Directory.CreateDirectory(localDir);
-                outputStream = new FileStream(string.Format("{0}\\{1}", localDir, localFileName), FileMode.Create);
+                FileStream outputStream = new FileStream(string.Format("{0}\\{1}", localDir, localFileName), FileMode.Create);
                 FtpWebRequest reqFTP = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("{0}//{1}", remotePath, remoteFileName)));
                 reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
                 reqFTP.UseBinary = true;
@@ -112,15 +111,12 @@ namespace AutoUpdate
                 }
                 ftpStream.Close();
                 response.Close();
+                outputStream.Close();
                 return true;
             }
             catch
             {
                 return false;
-            }
-            finally
-            {
-                outputStream.Close();
             }
         }
 
@@ -161,18 +157,25 @@ namespace AutoUpdate
 
         public static string GetMD5HashFromFile(string fileName)
         {
-            FileStream file;
-            if (File.Exists(fileName))
-                file = File.OpenRead(fileName);
-            else
+            try
+            {
+                FileStream file;
+                if (File.Exists(fileName))
+                    file = File.OpenRead(fileName);
+                else
+                    return null;
+                System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+                byte[] retVal = md5.ComputeHash(file);
+                file.Close();
+                StringBuilder str = new StringBuilder();
+                for (int i = 0; i < retVal.Length; i++)
+                    str.Append(retVal[i].ToString("X2"));
+                return str.ToString();
+            }
+            catch
+            {
                 return null;
-            System.Security.Cryptography.MD5 md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
-            byte[] retVal = md5.ComputeHash(file);
-            file.Close();
-            StringBuilder str = new StringBuilder();
-            for (int i = 0; i < retVal.Length; i++)
-                str.Append(retVal[i].ToString("X2"));
-            return str.ToString();
+            }
         }
 
         internal static string FormatFileSize(long fileSize)
