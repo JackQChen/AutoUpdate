@@ -85,12 +85,13 @@ namespace AutoUpdate
 
         public bool Download(string remotePath, string remoteFileName, string localPath, string localFileName)
         {
+            FileStream outputStream = null;
             try
             {
                 var localDir = AppDomain.CurrentDomain.BaseDirectory + localPath;
                 if (!Directory.Exists(localDir))
                     Directory.CreateDirectory(localDir);
-                FileStream outputStream = new FileStream(string.Format("{0}\\{1}", localDir, localFileName), FileMode.Create);
+                outputStream = new FileStream(string.Format("{0}\\{1}", localDir, localFileName), FileMode.Create);
                 FtpWebRequest reqFTP = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("{0}//{1}", remotePath, remoteFileName)));
                 reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
                 reqFTP.UseBinary = true;
@@ -111,12 +112,15 @@ namespace AutoUpdate
                 }
                 ftpStream.Close();
                 response.Close();
-                outputStream.Close();
                 return true;
             }
             catch
             {
                 return false;
+            }
+            finally
+            {
+                outputStream.Close();
             }
         }
 
