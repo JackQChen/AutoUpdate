@@ -120,7 +120,8 @@ namespace AutoUpdate
             }
             finally
             {
-                outputStream.Close();
+                if (outputStream != null)
+                    outputStream.Close();
             }
         }
 
